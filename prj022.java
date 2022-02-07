@@ -1,17 +1,19 @@
 package prj22;
 
 import java.util.Arrays;
+import java.util.HashMap;
 
 public class prj022 {
 	
 	public static String maxNumber = "";
 	
-	public static String maxNum(int[] array)
+	public static String maxNum_old(int[] array)
 	{
 		int arrNum = array.length;
 		int [] sortArr = new int[arrNum];
 		boolean[] isVisited = new boolean[arrNum];
 		maxNum_dfs(array, isVisited, sortArr, 0);
+		System.out.println(maxNumber);
 		return maxNumber;
 	}
 	
@@ -25,6 +27,8 @@ public class prj022 {
 			{
 				temp = "0";
 			}
+			
+			//System.out.println(temp);
 			
 			if(numCheck(maxNumber, temp))
 			{
@@ -82,15 +86,48 @@ public class prj022 {
 		
 		return false;
 	}
+	
+	public static String maxNum(int [] array)
+	{
+		Arrays.sort(array);
+		System.out.println(Arrays.toString(array));
+		int maxDigit = (int) Math.log10(array[array.length - 1]) + 1;
+		System.out.println("mxdigit - "+maxDigit);
+		
+		HashMap <Integer,Integer> map = new HashMap<>();
+		String answer = "";
+		
+		for(int i = 0; i < array.length; i++)
+		{
+			int numDigitOne = array[i] % 10;
+			int tempDigit = (int) Math.log10(array[i]) + 1;
+			while((int) Math.log10(array[i]) + 1 < maxDigit)
+			{
+				array[i] = array[i] * 10 + numDigitOne;
+			}
+			map.put(array[i], tempDigit);
+		}
+		
+		Arrays.sort(array);
+		System.out.println(map);
+		System.out.println(Arrays.toString(array));
+		
+		for(int i = array.length - 1; i >= 0; i--)
+		{
+			answer = answer + Integer.toString(array[i]).substring(0,map.get(array[i]));
+		}
+		System.out.println(answer);
+		return answer;
+	}
 
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 
-		int [] numbers = {0, 0};
-		maxNum(numbers);
+		int [] numbers = {34, 342, 345, 5, 9};
+		maxNum_old(numbers);
 		
 	}
-
 }
 
 
