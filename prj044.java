@@ -1,6 +1,6 @@
 package prj44;
 
-public class prj044 { // wip
+public class prj044 {
 	public static long[] under2dif(long[] arr)
 	{
 		long[] ans = new long[arr.length];
@@ -10,12 +10,15 @@ public class prj044 { // wip
 			StringBuilder sb = new StringBuilder(Long.toBinaryString(arr[i]));
 			boolean isChanged = false;
 			
-			
 			for(int j = sb.length() - 1; j >= 0; j--)
 			{
 				if(sb.charAt(j) == '0')
 				{
 					sb.setCharAt(j, '1');
+					if(j + 1 < sb.length())
+					{
+						sb.setCharAt(j + 1, '0');
+					}
 					isChanged = true;
 					break;
 				}
