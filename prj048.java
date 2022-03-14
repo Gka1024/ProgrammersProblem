@@ -1,7 +1,59 @@
 package prj48;
 
+import java.util.Set;
+import java.util.HashSet;
+
 public class prj048 {
 	public static int doorlen(String str)
+	{
+		int moveX = 0, moveY = 0;
+		int curX, curY;
+		Set<String> set = new HashSet<>();
+		
+		for(int i = 0; i < str.length(); i++) 
+		{
+			char ch = str.charAt(i);
+			curX = moveX;
+			curY = moveY;
+			if(ch == 'U' && moveY < 5)
+			{
+				moveY++;
+			}
+			if(ch == 'D' && moveY > -5)
+			{
+				moveY--;
+			}
+			if(ch == 'L' && moveX > -5)
+			{
+				moveX--;
+			}
+			if(ch == 'R' && moveX < 5)
+			{
+				moveX++;
+			}
+			
+			String moveXY = Integer.toString(moveX) + Integer.toString(moveY);
+			String curXY = Integer.toString(curX) + Integer.toString(curY);
+			
+			if(!set.contains(moveXY + curXY) && !set.contains(curXY + moveXY) && !(moveXY + curXY).matches(curXY + moveXY))
+			{
+				set.add(moveXY + curXY);
+				set.add(curXY + moveXY);
+			}
+		}
+		System.out.println(set.size());
+		return set.size() / 2;
+	}
+	
+	public static void main(String[] args)
+	{
+		String dirs = "UDU";
+		doorlen(dirs);
+	}
+}
+
+/*
+ public static int doorlen(String str)
 	{
 		boolean[][] map = new boolean[21][21];
 		
@@ -73,13 +125,6 @@ public class prj048 {
 			}
 			
 		}
-		
+		System.out.println(count);
 		return count;
-	}
-	
-	public static void main(String[] args)
-	{
-		String dirs = "ULURRDLLU";
-		doorlen(dirs);
-	}
-}
+	} */
