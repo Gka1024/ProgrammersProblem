@@ -45,3 +45,33 @@ int main()
     cout << tangSize;
     return 0;
 }
+
+// take2
+/*
+using namespace std;
+
+vector<int> tang;
+
+bool sizeComp(int a, int b)
+{
+    return count(tang.begin(), tang.end(), a) > count(tang.begin(), tang.end(), b);
+}
+
+int main()
+{
+    vector<int> tangerine = {1, 3, 2, 5, 4, 5, 2, 3, 5};
+    int k = 6;
+    tang = tangerine;
+    
+    sort(tangerine.begin(), tangerine.end());
+    sort(tangerine.begin(), tangerine.end(), sizeComp);
+
+    set<int> newSet;
+    
+    for(int i = 0; i < k; i++)
+    {
+        newSet.insert(tangerine[i]);
+    }
+
+    
+*/
